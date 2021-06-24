@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import com.ifoodmvpapi.IfoodmvpApiApplication;
 import com.ifoodmvpapi.domain.model.Cozinha;
 
-public class InclusaoCozinhaMain {
+public class ExclusaoCozinhaMain {
 	
 	@PersistenceContext
 	private EntityManager manager;
@@ -24,10 +24,9 @@ public class InclusaoCozinhaMain {
 		
 		Cozinha cozinha = new Cozinha();
 		cozinha.setId(1L);
-		cozinha.setNome("Brasileira");
 		
-		cadastroCozinha.salvar(cozinha);
-				
+		cadastroCozinha.remover(cozinha);	
+		
 		
 	}
 

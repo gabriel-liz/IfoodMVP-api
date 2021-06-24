@@ -19,8 +19,7 @@ public class BuscaCozinhaMain {
 		Cozinha cozinha = cadastroCozinha.buscar(1L);
 		
 		System.out.println(cozinha.getNome());
-	}
-	
+	}	
 	
 
 }

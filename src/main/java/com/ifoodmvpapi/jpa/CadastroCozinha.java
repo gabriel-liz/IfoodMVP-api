@@ -30,9 +30,15 @@ public class CadastroCozinha {
 	}
 	
 	@Transactional
-	public Cozinha adicionar(Cozinha cozinha) {
+	public Cozinha salvar(Cozinha cozinha) {
 		return manager.merge(cozinha);
-
+	}
+	
+	@Transactional
+	public void remover(Cozinha cozinha) {
+		//caso não tenha a linha abaixo, ira dar erro ao rodar a exclusão pelo main, ler artigo https://blog.algaworks.com/tutorial-jpa/
+		cozinha = buscar(cozinha.getId());
+		manager.remove(cozinha);
 	}
 
 }
