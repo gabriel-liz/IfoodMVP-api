@@ -1,4 +1,4 @@
-package com.ifoodmvpapi.jpa;
+package com.ifoodmvpapi.infrastructure.repository;
 
 import java.util.List;
 
@@ -9,36 +9,38 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ifoodmvpapi.domain.model.Cozinha;
+import com.ifoodmvpapi.domain.repository.CozinhaRepository;
 
 @Component
-public class CadastroCozinha {
+public class CozinhaRepositoryImpl implements CozinhaRepository{
 
-
-	//gerencia o contexto de persistencia
-	//responsavel por fazer a intermediação dos comandos da traducao do sql
 	@PersistenceContext
 	private EntityManager manager;
 
-	public List<Cozinha> listar(){
+	
+	@Override
+	public List<Cozinha> todas(){
 		return  manager.createQuery("from Cozinha", Cozinha.class)
 				.getResultList();			
 
 	}
 	
-	public Cozinha buscar(Long id) {
+	@Override
+	public Cozinha porId(Long id) {
 		return manager.find(Cozinha.class, id);
 	}
-	
+	 
 	@Transactional
-	public Cozinha salvar(Cozinha cozinha) {
+	@Override
+	public Cozinha adicionar(Cozinha cozinha) {
 		return manager.merge(cozinha);
 	}
 	
 	@Transactional
+	@Override
 	public void remover(Cozinha cozinha) {
 		//caso não tenha a linha abaixo, ira dar erro ao rodar a exclusão pelo main, ler artigo https://blog.algaworks.com/tutorial-jpa/
-		cozinha = buscar(cozinha.getId());
+		cozinha = porId(cozinha.getId());
 		manager.remove(cozinha);
 	}
-
 }

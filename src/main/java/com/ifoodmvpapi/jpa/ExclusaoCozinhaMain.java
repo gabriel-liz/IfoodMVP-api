@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.ifoodmvpapi.IfoodmvpApiApplication;
 import com.ifoodmvpapi.domain.model.Cozinha;
+import com.ifoodmvpapi.domain.repository.CozinhaRepository;
 
 public class ExclusaoCozinhaMain {
 	
@@ -20,13 +21,12 @@ public class ExclusaoCozinhaMain {
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
+		CozinhaRepository cozinhas = applicationContext.getBean(CozinhaRepository.class);
 		
 		Cozinha cozinha = new Cozinha();
 		cozinha.setId(1L);
 		
-		cadastroCozinha.remover(cozinha);	
-		
+		cozinhas.remover(cozinha);	 		
 		
 	}
 
